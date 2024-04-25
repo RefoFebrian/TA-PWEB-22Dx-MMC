@@ -15,7 +15,7 @@
             <img src="logo.png" alt="Logo">
         </div>
         <div class=" text-center mt-4 name">Klinik Pratama Sumbersion</div>
-        <form class="p-3 mt-4" action="cek-login.php" method="post">
+        <form class="p-3 mt-3" action="cek-login.php" method="post">
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-user"></span>
                 <input type="text" name="username" id="username" placeholder="Username">
