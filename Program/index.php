@@ -10,16 +10,22 @@
 </head>
 
 <body>
-    <form action="cek-login.php" method="post">
-        <div class="form-field d-flex align-items-center">
-            <span class="far fa-user"></span>
-            <input type="text" name="username" id="username" placeholder="Username">
+    <div class="wrapper">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
         </div>
-        <div class="form-field d-flex align-items-center">
-            <span class="fas fa-key"></span><input type="password" name="pass" id="pass" placeholder="Password">
-        </div>
-        <button class="btn mt-3">Login</button>
-    </form>
+        <div class="name">Klinik Pratama Sumbersion</div>
+        <form action="cek-login.php" method="post">
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text" name="username" id="username" placeholder="Username">
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span><input type="password" name="pass" id="pass" placeholder="Password">
+            </div>
+            <button class="btn mt-3">Login</button>
+        </form>
+    </div>
 </body>
 
 </html>
