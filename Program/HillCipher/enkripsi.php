@@ -16,3 +16,23 @@ function textToAscii($plaintext)
     }
     return $result;
 }
+
+// Fungsi membagi setiap kode ASCII menjadi matriks
+function bagiBlok($arr, $baris, $kolom)
+{
+  $matrix = [];
+  $index = 0;
+  for ($i = 0; $i < $baris; $i++) {
+    $barisBaru = [];
+    for ($j = 0; $j < $kolom; $j++) {
+      if ($index < count($arr)) {
+        $barisBaru[] = $arr[$index];
+        $index++;
+      } else {
+        $barisBaru[] = null;
+      }
+    }
+    $matrix[] = $barisBaru;
+  }
+  return $matrix;
+}
