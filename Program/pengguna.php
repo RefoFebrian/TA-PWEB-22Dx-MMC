@@ -61,6 +61,28 @@ function koneksidatabase()
     // Mengembalikan koneksi database
     return $kdb;
 }
+
+/**
+ * Fungsi untuk mengambil data pengguna dari database berdasarkan ID pengguna.
+ *
+ * @param int $id_user ID pengguna yang akan dicari dalam database.
+ * @return mixed Hasil query dari data pengguna yang ditemukan atau null jika tidak ada data.
+ */
+function sql_select_byid($id_user)
+{
+    // Mengakses variabel koneksi database global
+    global $kdb;
+
+    // Membuat query SQL untuk mengambil data pengguna berdasarkan ID
+    $sql = "SELECT * FROM pengguna WHERE id_user= " . $id_user;
+
+    // Menjalankan query SQL dan menyimpan hasilnya
+    $hasil2 = mysqli_query($kdb, $sql) or die(mysqli_error($kdb));
+
+    // Mengembalikan hasil query
+    return $hasil2;
+}
+
 ?>
 
 <!-- Fungsi Formeditor -->
