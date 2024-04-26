@@ -127,4 +127,5 @@ function curd_create()
             <p><input type="submit" name="action" value="Simpan" class="btn btn-success "></p>
         </form>
     </center>
+    
 <?php } ?>
