@@ -83,6 +83,27 @@ function sql_select_byid($id_user)
     return $hasil2;
 }
 
+/**
+ * Fungsi untuk mengambil semua data pengguna dari database.
+ *
+ * @return mixed Hasil query dari semua data pengguna yang ditemukan atau null jika tidak ada data.
+ */
+function sql_select()
+{
+    // Mengakses variabel koneksi database global
+    global $kdb;
+
+    // Membuat query SQL untuk mengambil semua data pengguna
+    $sql = "SELECT * FROM pengguna";
+
+    // Menjalankan query SQL dan menyimpan hasilnya
+    $hasil = mysqli_query($kdb, $sql) or die(mysqli_error($kdb));
+
+    // Mengembalikan hasil query
+    return $hasil;
+}
+
+
 ?>
 
 <!-- Fungsi Formeditor -->
