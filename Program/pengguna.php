@@ -152,3 +152,44 @@ function curd_create()
     </center>
 
 <?php } ?>
+
+<?php
+// Fungsi untuk menampilkan formulir pengubahan data pengguna
+function curd_update($id_user)
+{
+    // Mengakses variabel koneksi database global
+    global $kdb;
+
+    // Mengambil data pengguna berdasarkan ID dari database
+    $hasil2 = sql_select_byid($id_user);
+
+    // Mengambil satu baris data pengguna dari hasil query
+    $row = mysqli_fetch_array($hasil2);
+?>
+    <!-- Mulai form untuk pengubahan data pengguna -->
+    <center>
+        <!-- Judul form -->
+        <h3>Pengubahan Data user</h3><br>
+
+        <!-- Tombol untuk membatalkan pengubahan data -->
+        <a href="pengguna.php?a=reset" class="btn btn-danger">Batal</a>
+        <br>
+
+        <!-- Form untuk mengirimkan data pengubahan pengguna -->
+        <form action="pengguna.php?a=reset" method="post">
+            <!-- Input tersembunyi untuk menandai tipe operasi SQL -->
+            <input type="hidden" name="sql" value="update">
+
+            <!-- Input tersembunyi untuk menyimpan ID pengguna yang akan diubah -->
+            <input type="hidden" name="id_user" value="<?php echo $id_user; ?>">
+
+            <?php
+            // Memanggil fungsi untuk menampilkan form pengisian data pengguna
+            formeditor($row)
+            ?>
+
+            <!-- Tombol untuk menyimpan data pengguna yang telah diubah -->
+            <p><input type="submit" name="action" value="Update" class="btn btn-success "></p>
+        </form>
+    </center>
+<?php } ?>
