@@ -84,6 +84,39 @@ function sql_select_byid($id_user)
 }
 
 /**
+ * Fungsi untuk menyisipkan data pengguna baru ke dalam database.
+ */
+function sql_insert()
+{
+    // Mengakses variabel koneksi database global
+    global $kdb;
+
+    // Mengakses data yang dikirim melalui metode POST
+    global $_POST;
+
+    // Mengambil data username, password, dan hak dari data POST
+    $encryptedUsername = $_POST["username"];
+    $encryptedPassword = $_POST["password"];
+    $encryptedhak = $_POST["hak"];
+
+    // Membuat query SQL untuk menyisipkan data pengguna baru
+    $sql = "INSERT INTO `pengguna` (`username`, `password`, `hak`) VALUES (?, ?, ?)";
+
+    // Persiapan statement SQL
+    $stmt = mysqli_prepare($kdb, $sql);
+
+    // Binding parameter ke dalam statement SQL
+    mysqli_stmt_bind_param($stmt, "sss", $encryptedUsername, $encryptedPassword, $encryptedhak);
+
+    // Menjalankan statement SQL
+    mysqli_stmt_execute($stmt);
+
+    // Menutup statement SQL
+    mysqli_stmt_close($stmt);
+}
+
+
+/**
  * Fungsi untuk mengambil semua data pengguna dari database.
  *
  * @return mixed Hasil query dari semua data pengguna yang ditemukan atau null jika tidak ada data.
