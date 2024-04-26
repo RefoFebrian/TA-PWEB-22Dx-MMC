@@ -62,3 +62,35 @@
         return $kdb;
     }
     ?>
+
+    <!-- Fungsi Formeditor -->
+    <?php
+function formeditor($row)
+{
+?>
+    <center>
+        <table>
+            <tr>
+                <td width="200px">Nama user</td>
+                <td><input type="text" name="username" id="username" maxlength="25" size="25" value="<?php echo trim($row["username"]) ?>"></td>
+            </tr>
+            <tr>
+                <td width="200px">password</td>
+                <td><input type="text" name="password" id="password" maxlength="25" size="25" value="<?php echo trim($row["password"]) ?>"></td>
+            </tr>
+            <tr>
+                <td width="200px">hak</td>
+                <td>
+                    <select name="hak">
+                        <option value="admin">Admin</option>
+                        <option value="pegawai">Pegawai</option>
+                        <option value="apotek">Apotek</option>
+                        <option value="kasir">Kasir</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </center>
+<?php
+}
+?>
