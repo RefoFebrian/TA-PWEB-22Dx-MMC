@@ -167,7 +167,6 @@ function curd_update($id_user)
             // Memanggil fungsi untuk menampilkan form pengisian data pengguna
             formeditor($row)
             ?>
-
             <!-- Tombol untuk menyimpan data pengguna yang telah diubah -->
             <p><input type="submit" name="action" value="Update" class="btn btn-success "></p>
         </form>
