@@ -193,3 +193,73 @@ function curd_update($id_user)
             <p><input type="submit" name="action" value="Update" class="btn btn-success "></p>
         </form>
     <?php } ?>
+    <!-- Fungsi untuk Koneksi ke database -->
+    <?php
+    // Funsi Mengambil koneksi dari koneksi.php
+    function koneksidatabase()
+    {
+        include('../koneksi.php');
+        return $kdb;
+    }
+    // Fungsi Mengambil data dari Form Pengguna
+    function sql_select()
+    {
+        global $kdb;
+        $sql = " select * from pengguna ";
+        $hasil = mysqli_query($kdb, $sql) or die(mysqli_error($kdb));
+        return $hasil;
+    }
+    // Fungsi untuk memasukan data ke dalam form pengguna dengan validasi hak user
+    function sql_insert()
+    {
+        global $kdb;
+        global $_POST;
+
+        $encryptedUsername = $_POST["username"];
+        $encryptedPassword = $_POST["password"];
+        $encryptedhak = $_POST["hak"];
+
+        $sql = "INSERT INTO `pengguna` (`username`, `password`, `hak`) VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($kdb, $sql);
+        mysqli_stmt_bind_param($stmt, "sss", $encryptedUsername, $encryptedPassword, $encryptedhak);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+    function sql_select_byid($id_user)
+    {
+        global $kdb;
+        $sql = "select * from pengguna where id_user= " . $id_user;
+        $hasil2 = mysqli_query($kdb, $sql) or die(mysqli_error($kdb));
+        return $hasil2;
+    }
+    // Fungsi untuk mengganti data dalam database dengan validasi hak user
+    function sql_update()
+    {
+        global $kdb;
+        global $_POST;
+        $encryptedUsername = $_POST["username"];
+        $encryptedPassword = $_POST["password"];
+        $encryptedhak = $_POST["hak"];
+        $id_user = $_POST["id_user"];
+
+        $sql  = "UPDATE `pengguna` SET `username` = ?, `password` = ?,`hak` = ? WHERE `id_user` = ?";
+        $stmt = mysqli_prepare($kdb, $sql);
+        mysqli_stmt_bind_param($stmt, "sssi", $encryptedUsername, $encryptedPassword, $encryptedhak , $id_user);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+    }
+    // Fungsi untuk menghapus data dalam database
+    function sql_delete()
+    {
+        global $kdb;
+        global $_POST;
+        $sql  = " delete from `pengguna` where id_user= " . $_POST["id_user"];
+        mysqli_query($kdb, $sql) or die(mysqli_error($kdb));
+    }
+
+    ?>
+
+
+    <?php
+    include '../layout/F1.php';
+    ?>
