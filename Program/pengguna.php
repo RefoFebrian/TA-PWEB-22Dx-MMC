@@ -172,3 +172,24 @@ function curd_update($id_user)
         </form>
     </center>
 <?php } ?>
+<!-- Menambahkan Fungsi Delete/Hapus -->
+<?php
+    function curd_delete($id_user)
+    {
+        global $kdb;
+        $hasil2 = sql_select_byid($id_user);
+        $row = mysqli_fetch_array($hasil2);
+    ?>
+    <!-- Judul Form -->
+        <h3>Penghapusan Data user</h3><br>
+        <!-- Tombol Untuk Pembatalan penghapusan -->
+        <a href="pengguna.php?a=reset" class="btn btn-danger ">Batal</a>
+        <br>
+        <!-- Fungsi untuk menghapus data -->
+        <form action="pengguna.php?a=reset" method="post">
+            <input type="hidden" name="sql" value="delete">
+            <input type="hidden" name="id_user" value="<?php echo $id_user; ?>">
+            <h3> Anda yakin akan menghapus data  <?php echo $row['username']; ?> </h3>
+            <p><input type="submit" name="action" value="Update" class="btn btn-success "></p>
+        </form>
+    <?php } ?>
