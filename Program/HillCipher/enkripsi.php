@@ -65,3 +65,14 @@ function matrixTo1DArray($matrix)
   }
   return $result;
 }
+
+// Fungsi untuk mengembalikan teks dari kode ASCII
+function asciiToText($asciiArray)
+{
+  $result = "";
+  for ($i = 0; $i < count($asciiArray); $i++) {
+    $char = chr($asciiArray[$i]);
+    $result .= $char;
+  }
+  return $result;
+}
