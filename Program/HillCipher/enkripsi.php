@@ -132,7 +132,7 @@ function adjoinn($kofaktor)
   return $hasilAdj;
 }
 
-// Fungsi untuk mencari N? x N? di mod 128 hasilnya 1 (Menggunakan Algoritma Euclidean)
+// Fungsi untuk mencari Persamaan modulo N? x N? di mod 128 hasilnya 1 (Menggunakan Algoritma Euclidean)
 function findModuloResult($a, $m)
 {
 
@@ -150,6 +150,18 @@ function findModuloResult($a, $m)
   }
 }
 
+// Fungsi mengalikan hasil persamaan modulo dengan adjoin
+function modAdj($determinanMod, $adjoin)
+{
+  $hasil = [];
+  for ($i = 0; $i < count($adjoin); $i++) {
+    $hasil[$i] = [];
+    for ($j = 0; $j < count($adjoin); $j++) {
+      $hasil[$i][$j] = ($adjoin[$i][$j] * $determinanMod) % 128;
+    }
+  }
+  return $hasil;
+}
 
 // membuat fungsi enkripsi HillCipher
 function enkripsiHillCipher($plaintext, $kunci)
