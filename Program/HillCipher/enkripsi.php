@@ -119,6 +119,18 @@ function kofaktort($key)
   return $hasilKofaktor;
 }
 
+// Fungsi mencari hasil Adjoin dari kunci. Adjoin = (transpose hasil konfaktor kunci)
+function adjoinn($kofaktor)
+{
+  $hasilAdj = [];
+  for ($i = 0; $i < 3; $i++) {
+    $hasilAdj[$i] = [];
+    for ($j = 0; $j < 3; $j++) {
+      $hasilAdj[$i][$j] = $kofaktor[$j][$i];
+    }
+  }
+  return $hasilAdj;
+}
 // membuat fungsi enkripsi HillCipher
 function enkripsiHillCipher($plaintext, $kunci)
 {
