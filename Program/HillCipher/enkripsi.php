@@ -77,6 +77,19 @@ function asciiToText($asciiArray)
   return $result;
 }
 
+// Fungsi mencari determinan
+function determinannnn($key)
+{
+  return (
+    $key[0][0] * $key[1][1] * $key[2][2] +
+    $key[0][1] * $key[1][2] * $key[2][0] +
+    $key[0][2] * $key[1][0] * $key[2][1] -
+    ($key[2][0] * $key[1][1] * $key[0][2] +
+      $key[2][1] * $key[1][2] * $key[0][0] +
+      $key[2][2] * $key[1][0] * $key[0][1])
+  );
+}
+
 // membuat fungsi enkripsi HillCipher
 function enkripsiHillCipher($plaintext, $kunci)
 {
