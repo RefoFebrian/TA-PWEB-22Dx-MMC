@@ -90,6 +90,35 @@ function determinannnn($key)
   );
 }
 
+//Fungsi untuk mencari kofaktor kunci
+function kofaktort($key)
+{
+  $hasilKofaktor = [];
+  for ($i = 0; $i < 3; $i++) {
+    $hasilKofaktor[$i] = [];
+  }
+  $a = $key[1][1] * $key[2][2] - $key[2][1] * $key[1][2];
+  $b = - ($key[1][0] * $key[2][2] - $key[2][0] * $key[1][2]);
+  $c = $key[1][0] * $key[2][1] - $key[2][0] * $key[1][1];
+  $d = - ($key[0][1] * $key[2][2] - $key[2][1] * $key[0][2]);
+  $e = $key[0][0] * $key[2][2] - $key[2][0] * $key[0][2];
+  $f = - ($key[0][0] * $key[2][1] - $key[2][0] * $key[0][1]);
+  $g = $key[0][1] * $key[1][2] - $key[1][1] * $key[0][2];
+  $h = - ($key[0][0] * $key[1][2] - $key[1][0] * $key[0][2]);
+  $i = $key[0][0] * $key[1][1] - $key[1][0] * $key[0][1];
+
+  $hasilKofaktor[0][0] = $a;
+  $hasilKofaktor[0][1] = $b;
+  $hasilKofaktor[0][2] = $c;
+  $hasilKofaktor[1][0] = $d;
+  $hasilKofaktor[1][1] = $e;
+  $hasilKofaktor[1][2] = $f;
+  $hasilKofaktor[2][0] = $g;
+  $hasilKofaktor[2][1] = $h;
+  $hasilKofaktor[2][2] = $i;
+  return $hasilKofaktor;
+}
+
 // membuat fungsi enkripsi HillCipher
 function enkripsiHillCipher($plaintext, $kunci)
 {
