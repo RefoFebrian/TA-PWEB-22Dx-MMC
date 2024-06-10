@@ -201,3 +201,26 @@ function enkripsiHillCipher($plaintext, $kunci)
   return $plaintextDariAscii;
 }
 
+
+// Membuat fungsi UNtuk mendekripsi Plaintext yang ter enkripsi
+function DekripsiHillCipher($cipertext, $kunci)
+{
+  $AngkaText = textToAsciii($cipertext);
+  if (count($AngkaText) % 3 == 1) {
+    $AngkaText[] = 0;
+    $AngkaText[] = 0;
+  } elseif (count($AngkaText) % 3 == 2) {
+    $AngkaText[] = 0;
+  }
+  $hslDeterminan = determinannnn($kunci);
+  $modDeterminan = $hslDeterminan % 128;
+  $konv = kofaktort($kunci);
+  $adj = adjoinn($konv);
+  $modDet = findModuloResult($modDeterminan, 128);
+  $hslInvers = modAdj($modDet, $adj);
+  $blokMatrik = bagiBlokk($AngkaText, count($AngkaText) / 3, 3);
+  $dekripSementara = kaliDekrip($blokMatrik, $hslInvers);
+  $arraySatuDimensi = matrixTo1DArrayy(modDekrip($dekripSementara));
+  $plaintextDariAscii = asciiToTextt($arraySatuDimensi);
+  return $plaintextDariAscii;
+}
