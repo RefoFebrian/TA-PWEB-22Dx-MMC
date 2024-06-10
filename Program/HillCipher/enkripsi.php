@@ -131,6 +131,26 @@ function adjoinn($kofaktor)
   }
   return $hasilAdj;
 }
+
+// Fungsi untuk mencari N? x N? di mod 128 hasilnya 1 (Menggunakan Algoritma Euclidean)
+function findModuloResult($a, $m)
+{
+
+  list($gcd, $x, $y) = gcdExtended($a, $m);
+
+  if ($gcd !== 1) {
+    return -1; // Nilai -1 untuk menunjukkan bahwa solusi tidak ada
+  } else {
+    // Pastikan $x positif
+    if ($x < 0) {
+      $x += $m;
+    }
+
+    return $x; // Kembalikan nilai $x sebagai angka
+  }
+}
+
+
 // membuat fungsi enkripsi HillCipher
 function enkripsiHillCipher($plaintext, $kunci)
 {
