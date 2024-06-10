@@ -17,7 +17,7 @@ function textToAscii($plaintext)
     return $result;
 }
 
-// Fungsi membagi setiap kode ASCII menjadi matriks
+// Fungsi membagi setiap kode ASCII menjadi matriks array 2d
 function bagiBlok($arr, $baris, $kolom)
 {
   $matrix = [];
@@ -52,4 +52,16 @@ function perkalian($blok, $key)
     }
   }
   return $hasil;
+}
+
+// Fungsi untuk mengubah matriks array 2d ke array satu dimensi
+function matrixTo1DArray($matrix)
+{
+  $result = [];
+  for ($i = 0; $i < count($matrix); $i++) {
+    for ($j = 0; $j < count($matrix[$i]); $j++) {
+      $result[] = $matrix[$i][$j];
+    }
+  }
+  return $result;
 }
