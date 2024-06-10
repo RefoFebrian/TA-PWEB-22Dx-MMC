@@ -163,6 +163,24 @@ function modAdj($determinanMod, $adjoin)
   return $hasil;
 }
 
+// Membuat fungsi kali dekrip untuk mengalikan kode ascii dengan invers matriks kunci
+// (Sebenearnya sama dengan fungsi perkalian matriks di atas, hanya saja ini tidak di modulo)
+function kaliDekrip($ciper, $invers)
+{
+  $hasil = [];
+  for ($i = 0; $i < count($ciper); $i++) {
+    $hasil[$i] = [];
+    for ($j = 0; $j < count($invers); $j++) {
+      $sum = 0;
+      for ($k = 0; $k < count($invers); $k++) {
+        $sum += $ciper[$i][$k] * $invers[$j][$k];
+      }
+      $hasil[$i][$j] = $sum;
+    }
+  }
+  return $hasil;
+}
+
 // membuat fungsi enkripsi HillCipher
 function enkripsiHillCipher($plaintext, $kunci)
 {
@@ -182,3 +200,4 @@ function enkripsiHillCipher($plaintext, $kunci)
   $plaintextDariAscii = asciiToText($arraySatuDimensi);
   return $plaintextDariAscii;
 }
+
