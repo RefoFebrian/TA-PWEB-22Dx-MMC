@@ -36,3 +36,20 @@ function bagiBlok($arr, $baris, $kolom)
   }
   return $matrix;
 }
+
+// Fungsi mengalikan sekaligus memodulo kunci dengan plaintext yang sudah dibagi per 3 bagian
+function perkalian($blok, $key)
+{
+  $hasil = [];
+  for ($i = 0; $i < count($blok); $i++) {
+    $hasil[$i] = [];
+    for ($j = 0; $j < count($key); $j++) {
+      $sum = 0;
+      for ($k = 0; $k < count($key); $k++) {
+        $sum += $blok[$i][$k] * $key[$j][$k];
+      }
+      $hasil[$i][$j] = $sum % 128;
+    }
+  }
+  return $hasil;
+}
