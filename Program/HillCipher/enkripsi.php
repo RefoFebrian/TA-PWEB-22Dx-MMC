@@ -76,3 +76,23 @@ function asciiToText($asciiArray)
   }
   return $result;
 }
+
+// membuat fungsi enkripsi HillCipher
+function enkripsiHillCipher($plaintext, $kunci)
+{
+
+  $textAngka = textToAscii($plaintext);
+
+  // Penyesuaian jika plaintext tidak bisa dibagi 3
+  if (count($textAngka) % 3 == 1) {
+    $textAngka[] = 0;
+    $textAngka[] = 0;
+  } elseif (count($textAngka) % 3 == 2) {
+    $textAngka[] = 0;
+  }
+  $blokMatrik = bagiBlok($textAngka, count($textAngka) / 3, 3);
+  $hasilKali = perkalian($blokMatrik, $kunci);
+  $arraySatuDimensi = matrixTo1DArray($hasilKali);
+  $plaintextDariAscii = asciiToText($arraySatuDimensi);
+  return $plaintextDariAscii;
+}
