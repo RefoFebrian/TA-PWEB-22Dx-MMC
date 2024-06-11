@@ -273,4 +273,35 @@ function sql_select_byid($id_user)
     // Mengembalikan hasil query
     return $hasil2;
 }
+// Fungsi untuk memperbarui data pengguna berdasarkan ID
+function sql_update()
+{
+    // Variabel global $kdb digunakan untuk koneksi database
+    global $kdb;
+
+    // Variabel global $_POST digunakan untuk mengakses data yang dikirimkan melalui metode POST
+    global $_POST;
+
+    // Mengambil nilai username, password, hak, dan id_user dari data yang dikirimkan melalui metode POST
+    $encryptedUsername = $_POST["username"];
+    $encryptedPassword = $_POST["password"];
+    $encryptedhak = $_POST["hak"];
+    $id_user = $_POST["id_user"];
+
+    // Query SQL untuk memperbarui data pengguna dalam tabel pengguna
+    $sql  = "UPDATE `pengguna` SET `username` = ?, `password` = ?, `hak` = ? WHERE `id_user` = ?";
+
+    // Menyiapkan pernyataan SQL untuk dieksekusi dengan mysqli_prepare()
+    $stmt = mysqli_prepare($kdb, $sql);
+
+    // Mengikat parameter ke pernyataan yang disiapkan dengan mysqli_stmt_bind_param()
+    mysqli_stmt_bind_param($stmt, "sssi", $encryptedUsername, $encryptedPassword, $encryptedhak , $id_user);
+
+    // Mengeksekusi pernyataan yang disiapkan dengan mysqli_stmt_execute()
+    mysqli_stmt_execute($stmt);
+
+    // Menutup pernyataan yang disiapkan
+    mysqli_stmt_close($stmt);
+}
+
 ?>
