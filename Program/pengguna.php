@@ -303,5 +303,20 @@ function sql_update()
     // Menutup pernyataan yang disiapkan
     mysqli_stmt_close($stmt);
 }
+// Fungsi untuk menghapus data pengguna dari tabel pengguna berdasarkan ID
+function sql_delete()
+{
+    // Variabel global $kdb digunakan untuk koneksi database
+    global $kdb;
+
+    // Variabel global $_POST digunakan untuk mengakses data yang dikirimkan melalui metode POST
+    global $_POST;
+
+    // Query SQL untuk menghapus data pengguna dari tabel pengguna berdasarkan ID pengguna yang diberikan
+    $sql  = "DELETE FROM `pengguna` WHERE id_user = " . $_POST["id_user"];
+
+    // Menjalankan query ke database dengan mysqli_query() dan menangani kesalahan jika terjadi
+    mysqli_query($kdb, $sql) or die(mysqli_error($kdb));
+}
 
 ?>
