@@ -229,4 +229,33 @@ function sql_select()
     // Mengembalikan hasil query
     return $hasil;
 }
+// Fungsi untuk menambahkan data pengguna ke dalam tabel pengguna
+function sql_insert()
+{
+    // Variabel global $kdb digunakan untuk koneksi database
+    global $kdb;
+    
+    // Variabel global $_POST digunakan untuk mengakses data yang dikirimkan melalui metode POST
+    global $_POST;
+
+    // Mengambil nilai username, password, dan hak dari data yang dikirimkan melalui metode POST
+    $encryptedUsername = $_POST["username"];
+    $encryptedPassword = $_POST["password"];
+    $encryptedhak = $_POST["hak"];
+
+    // Query SQL untuk menyisipkan data pengguna ke dalam tabel pengguna
+    $sql = "INSERT INTO `pengguna` (`username`, `password`, `hak`) VALUES (?, ?, ?)";
+
+    // Menyiapkan pernyataan SQL untuk dieksekusi dengan mysqli_prepare()
+    $stmt = mysqli_prepare($kdb, $sql);
+
+    // Mengikat parameter ke pernyataan yang disiapkan dengan mysqli_stmt_bind_param()
+    mysqli_stmt_bind_param($stmt, "sss", $encryptedUsername, $encryptedPassword, $encryptedhak);
+
+    // Mengeksekusi pernyataan yang disiapkan dengan mysqli_stmt_execute()
+    mysqli_stmt_execute($stmt);
+
+    // Menutup pernyataan yang disiapkan
+    mysqli_stmt_close($stmt);
+}
 ?>
