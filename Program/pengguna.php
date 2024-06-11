@@ -258,4 +258,19 @@ function sql_insert()
     // Menutup pernyataan yang disiapkan
     mysqli_stmt_close($stmt);
 }
+// Fungsi untuk mengambil data pengguna berdasarkan ID
+function sql_select_byid($id_user)
+{
+    // Variabel global $kdb digunakan untuk koneksi database
+    global $kdb;
+
+    // Query SQL untuk mengambil data pengguna dengan ID yang sesuai
+    $sql = "SELECT * FROM pengguna WHERE id_user = " . $id_user;
+
+    // Menjalankan query ke database dengan mysqli_query() dan menyimpan hasilnya dalam variabel $hasil2
+    $hasil2 = mysqli_query($kdb, $sql) or die(mysqli_error($kdb));
+
+    // Mengembalikan hasil query
+    return $hasil2;
+}
 ?>
