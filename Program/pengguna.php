@@ -173,3 +173,26 @@ function curd_update($id_user)
         </form>
     </center>
 <?php } ?>
+<?php
+// Fungsi untuk menghapus data pengguna berdasarkan ID
+function curd_delete($id_user)
+{
+    // Variabel global $kdb digunakan untuk koneksi database
+    global $kdb;
+
+    // Mengambil data pengguna berdasarkan ID
+    $hasil2 = sql_select_byid($id_user);
+
+    // Mengambil satu baris data pengguna dari hasil query
+    $row = mysqli_fetch_array($hasil2);
+?>
+        <h3>Penghapusan Data user</h3><br>
+        <a href="pengguna.php?a=reset" class="btn btn-danger ">Batal</a>
+        <br>
+        <form action="pengguna.php?a=reset" method="post">
+            <input type="hidden" name="sql" value="delete">
+            <input type="hidden" name="id_user" value="<?php echo $id_user; ?>">
+            <h3> Anda yakin akan menghapus data  <?php echo $row['username']; ?> </h3>
+            <p><input type="submit" name="action" value="Update" class="btn btn-success "></p>
+        </form>
+    <?php } ?>
