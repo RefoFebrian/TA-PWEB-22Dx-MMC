@@ -1,0 +1,3 @@
+Membuat koneksi di koneksi.php
+Menambahkan Form dan button untuk delete (penguna.php line 175-195)
+Menambahkan Fungsi untuk berbagai perubahan di dalam database, seperti hapus ganti dan tambah (Pengguna.php line 196-264)
