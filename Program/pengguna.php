@@ -196,23 +196,6 @@ function curd_delete($id_user)
             <p><input type="submit" name="action" value="Update" class="btn btn-success "></p>
         </form>
     <?php } ?>
-    <?php
-// Fungsi untuk melakukan query SQL yang mengambil semua data dari tabel pengguna
-function sql_select()
-{
-    // Variabel global $kdb digunakan untuk koneksi database
-    global $kdb;
-
-    // Query SQL untuk mengambil semua data dari tabel pengguna
-    $sql = "SELECT * FROM pengguna";
-
-    // Melakukan query ke database dan menyimpan hasilnya dalam variabel $hasil
-    $hasil = mysqli_query($kdb, $sql) or die(mysqli_error($kdb));
-
-    // Mengembalikan hasil query
-    return $hasil;
-}
-?>
 <?php
 // Fungsi untuk melakukan query SQL yang mengambil semua data dari tabel pengguna
 function sql_select()
