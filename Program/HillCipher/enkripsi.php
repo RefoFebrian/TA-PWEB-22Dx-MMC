@@ -132,6 +132,22 @@ function adjoinn($kofaktor)
   return $hasilAdj;
 }
 
+// Fungsi untuk menghitung gcd($a, $m) menggunakan Algoritma Euclidean
+function gcdExtended($a, $b)
+{
+  if ($a === 0) {
+    return [$b, 0, 1];
+  }
+
+  list($gcd, $x1, $y1) = gcdExtended($b % $a, $a);
+
+  $x = $y1 - floor($b / $a) * $x1;
+  $y = $x1;
+
+  return [$gcd, $x, $y];
+}
+
+
 // Fungsi untuk mencari Persamaan modulo N? x N? di mod 128 hasilnya 1 (Menggunakan Algoritma Euclidean)
 function findModuloResult($a, $m)
 {
@@ -163,6 +179,24 @@ function modAdj($determinanMod, $adjoin)
   return $hasil;
 }
 
+//fungsi memodulus hasil kali (cipher x invers)
+function modDekrip($dekripSementara)
+{
+  $hasil = [];
+  for ($i = 0; $i < count($dekripSementara); $i++) {
+    $hasil[$i] = [];
+    for ($j = 0; $j < 3; $j++) {
+      if ($dekripSementara[$i][$j] < 0) {
+        $value = $dekripSementara[$i][$j];
+        $modulus = 128;
+        $hasil[$i][$j] = (($value % $modulus) + $modulus) % $modulus;
+      } else {
+        $hasil[$i][$j] = $dekripSementara[$i][$j] % 128;
+      }
+    }
+  }
+  return $hasil;
+}
 // Membuat fungsi kali dekrip untuk mengalikan kode ascii dengan invers matriks kunci
 // (Sebenearnya sama dengan fungsi perkalian matriks di atas, hanya saja ini tidak di modulo)
 function kaliDekrip($ciper, $invers)
@@ -205,7 +239,7 @@ function enkripsiHillCipher($plaintext, $kunci)
 // Membuat fungsi UNtuk mendekripsi Plaintext yang ter enkripsi
 function DekripsiHillCipher($cipertext, $kunci)
 {
-  $AngkaText = textToAsciii($cipertext);
+  $AngkaText = textToAscii($cipertext);
   if (count($AngkaText) % 3 == 1) {
     $AngkaText[] = 0;
     $AngkaText[] = 0;
@@ -218,9 +252,9 @@ function DekripsiHillCipher($cipertext, $kunci)
   $adj = adjoinn($konv);
   $modDet = findModuloResult($modDeterminan, 128);
   $hslInvers = modAdj($modDet, $adj);
-  $blokMatrik = bagiBlokk($AngkaText, count($AngkaText) / 3, 3);
+  $blokMatrik = bagiBlok($AngkaText, count($AngkaText) / 3, 3);
   $dekripSementara = kaliDekrip($blokMatrik, $hslInvers);
-  $arraySatuDimensi = matrixTo1DArrayy(modDekrip($dekripSementara));
-  $plaintextDariAscii = asciiToTextt($arraySatuDimensi);
+  $arraySatuDimensi = matrixTo1DArray(modDekrip($dekripSementara));
+  $plaintextDariAscii = asciiToText($arraySatuDimensi);
   return $plaintextDariAscii;
 }
