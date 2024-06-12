@@ -50,8 +50,37 @@ switch ($a) {
 }
 mysqli_close($kdb);
 // Lanjutkan pembuatan fungsi CRUD
-
-
+// Fungsi Read data dan search
+function curd_read()
+    {
+        global $kdb;
+        if (isset($_POST["cari2"])) {
+            $cari = $_POST["cari"];
+            $query = "SELECT * from pengguna where id_user LIKE ? 
+                      or username LIKE ? 
+                      or hak LIKE ?";
+            
+            // Buat prepared statement
+            $stmt = mysqli_prepare($kdb, $query);
+            
+            // Periksa apakah prepared statement berhasil dibuat
+            if ($stmt) {
+                // Binding parameter dan eksekusi prepared statement
+                $param = "%" . $cari . "%";
+                mysqli_stmt_bind_param($stmt, "sss", $param, $param, $param);
+                mysqli_stmt_execute($stmt);
+                
+                // Mengambil hasil
+                $hasil = mysqli_stmt_get_result($stmt);
+            } else {
+                // Penanganan kesalahan jika prepared statement gagal
+                die(mysqli_error($kdb));
+            }
+        } else {
+            $hasil = sql_select();
+        }        
+        $i = 1;
+    }
 // Fungsi Koneksi Ke database
 function koneksidatabase()
 {
