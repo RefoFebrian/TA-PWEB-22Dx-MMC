@@ -1,0 +1,3 @@
+1. Membuat file pengguna.php
+2. Membuat file koneksi.php
+3. Membuat koneksi ke fungsi CRUD di pengguna.php Line 1 sampai 64
