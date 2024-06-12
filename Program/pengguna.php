@@ -80,6 +80,57 @@ function curd_read()
             $hasil = sql_select();
         }        
         $i = 1;
+        ?>
+    <!-- Tampil data-->
+    <center>
+            <H3> MASTER DATA PENGGUNA </H3>
+            <br><br><br>
+            <ul class="bagan">
+               <li class="area_tmbhdta"><a href="pengguna.php?a=tambah" class="btn btn-warning" style="margin-left: 5px;">+ Tambah Data    </a></li>
+               <li class="area_cari">
+                   <form class="d-flex " role="search" action="" method="post">
+                       <input class="form-control me-2" type="text" name="cari" placeholder="Search" aria-label="Search">
+                       <button class="btn btn-outline-info" type="submit" name="cari2" value="cari">Search</button>
+                    </form>
+                </li> 
+            </ul>
+        </center> 
+        <center>
+            <table class="table table-bordered">
+                <tr>
+                    <td>No</td>
+                    <td>ID user</td>
+                    <td>username</td>
+                    <td>Password</td>
+                    <td>Hak</td>
+                    <td>Aksi</td>
+
+                </tr>
+                <?php
+                while ($baris = mysqli_fetch_array($hasil)) {
+                    $dekripusername = $baris['username'];
+                    $dekrippassword = $baris['password'];
+                    $dekriphak = $baris['hak'];
+                ?>
+                    <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $baris['id_user']; ?></td>
+                        <td><?php echo $dekripusername; ?></td>
+                        <td><?php echo $dekrippassword; ?></td>
+                        <td><?php echo $dekriphak; ?></td>
+                        <td>
+                            <a href="pengguna.php?a=edit&id=<?php echo $baris['id_user']; ?>" class="btn btn-success ">UPDATE</a>
+                            <a href="pengguna.php?a=hapus&id=<?php echo $baris['id_user']; ?>" class="btn btn-danger ">DELETE</a>
+                        </td>
+                    </tr>
+                <?php
+                    $i++;
+                }
+                ?>
+            </table>
+        </center>
+    <?php
+        mysqli_free_result($hasil);
     }
 // Fungsi Koneksi Ke database
 function koneksidatabase()
