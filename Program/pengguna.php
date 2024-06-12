@@ -1,5 +1,5 @@
-<html>
 <?php
+require_once './HillCipher/enkripsi.php';
 // Mengambil nilai 'a' dari query string jika tidak kosong, jika kosong maka diatur sebagai "reset"
 $a = !empty($_GET['a']) ? $_GET['a'] : "reset";
 
@@ -18,10 +18,10 @@ $sql = @$_POST["sql"];
 // Menggunakan switch case untuk memeriksa nilai dari $sql lalu menjalankan fungsi yang dipanggil
 switch ($sql) {
     case "insert":
-        sql_insert();
+        sql_insert($kunci);
         break;
     case "update":
-        sql_update();
+        sql_update($kunci);
         break;
     case "delete":
         sql_delete();
@@ -293,7 +293,7 @@ function sql_select()
     return $hasil;
 }
 // Fungsi untuk menambahkan data pengguna ke dalam tabel pengguna
-function sql_insert()
+function sql_insert($kunci)
 {
     // Variabel global $kdb digunakan untuk koneksi database
     global $kdb;
@@ -302,8 +302,8 @@ function sql_insert()
     global $_POST;
 
     // Mengambil nilai username, password, dan hak dari data yang dikirimkan melalui metode POST
-    $encryptedUsername = $_POST["username"];
-    $encryptedPassword = $_POST["password"];
+    $encryptedUsername = enkripsiHillCipher($_POST["username"],$kunci);
+    $encryptedPassword = enkripsiHillCipher($_POST["password"],$kunci);
     $encryptedhak = $_POST["hak"];
 
     // Query SQL untuk menyisipkan data pengguna ke dalam tabel pengguna
@@ -337,7 +337,7 @@ function sql_select_byid($id_user)
     return $hasil2;
 }
 // Fungsi untuk memperbarui data pengguna berdasarkan ID
-function sql_update()
+function sql_update($kunci)
 {
     // Variabel global $kdb digunakan untuk koneksi database
     global $kdb;
@@ -346,8 +346,8 @@ function sql_update()
     global $_POST;
 
     // Mengambil nilai username, password, hak, dan id_user dari data yang dikirimkan melalui metode POST
-    $encryptedUsername = $_POST["username"];
-    $encryptedPassword = $_POST["password"];
+    $encryptedUsername = enkripsiHillCipher($_POST["username"],$kunci);
+    $encryptedPassword = enkripsiHillCipher($_POST["password"],$kunci);
     $encryptedhak = $_POST["hak"];
     $id_user = $_POST["id_user"];
 
