@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include ('koneksi.php');
+include ('koneksi/koneksi.php');
 require 'HillCipher/enkripsi.php';
 
 if (isset($_POST['username']) && isset($_POST['pass'])) {
